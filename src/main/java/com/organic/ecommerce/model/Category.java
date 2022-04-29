@@ -10,26 +10,27 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="tb_category")
 public class Category {
-	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long id; 
 	
-	@NotBlank(message="O atributo é obrigatório")
-	private String category;
+	@NotBlank(message="Este campo é obrigatório.")
+	@Size(max=255, message="Este campo deverá ter o máximo de 20 caracteres.")
+	private String category; 
 	
 	@OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("category")
 	private List<Product> product;
 	
-	//GET AND SET
-
 	public Long getId() {
 		return id;
 	}
@@ -55,5 +56,4 @@ public class Category {
 	}
 	
 	
-
 }

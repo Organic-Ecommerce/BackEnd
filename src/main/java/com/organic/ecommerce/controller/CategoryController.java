@@ -2,6 +2,7 @@ package com.organic.ecommerce.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -23,8 +24,6 @@ import com.organic.ecommerce.model.Category;
 import com.organic.ecommerce.repository.CategoryRepository;
 import com.organic.ecommerce.repository.ProductRepository;
 
-
-
 @RestController
 @RequestMapping("/category")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -36,6 +35,7 @@ private CategoryRepository categoryRepository;
 	public CategoryController(ProductRepository productRepository, CategoryRepository categoryRepository){
 		this.categoryRepository = categoryRepository;
 	}
+	
 	@GetMapping
 	public ResponseEntity<List<Category>> getAll(){
 		return ResponseEntity.ok(categoryRepository.findAll());
@@ -61,16 +61,18 @@ private CategoryRepository categoryRepository;
         return ResponseEntity.created(location).body(savedCategory);
     }
 	
-    @PutMapping
-	public ResponseEntity<Category> putCategory(@Valid @RequestBody Category category) {
-					
-		return categoryRepository.findById(category.getId())
-				.map(resposta -> {
-					return ResponseEntity.ok().body(categoryRepository.save(category));
-				})
-				.orElse(ResponseEntity.notFound().build());
+    @PutMapping("/{id}")
+    public ResponseEntity<Category> update(@PathVariable Long id, @Valid @RequestBody Category category) {
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        if (!optionalCategory.isPresent()) {
+            return ResponseEntity.unprocessableEntity().build();
+        }
 
-	}
+        category.setId(optionalCategory.get().getId());
+        categoryRepository.save(category);
+
+        return ResponseEntity.noContent().build();
+    }
     
 	@DeleteMapping(path = "/{id}")
 	public  ResponseEntity<?> deleteCategory(@PathVariable Long id) {
@@ -80,5 +82,5 @@ private CategoryRepository categoryRepository;
 		}).orElse(ResponseEntity.notFound().build());
 		
 	}
-
+	
 }

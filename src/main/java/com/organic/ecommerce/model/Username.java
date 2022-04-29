@@ -16,11 +16,11 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
-@Table(name="tb_user")
-public class User {
+@Table(name="tb_username")
+public class Username {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -29,10 +29,10 @@ public class User {
 	@NotBlank(message = "O atributo nome é obrigatório!")
 	private String name;
 	
-	//@Schema(example = "email@email.com.br")
+	@Schema(example = "email@email.com.br")
 	@NotNull(message = "O atributo Usuário é Obrigatório!")
 	@Email(message = "O atributo Usuário deve ser um email válido!")
-	private String user;
+	private String username;
 	
 	@NotBlank(message = "O atributo senha é obrigatório!")
 	@Size(min = 8)
@@ -42,25 +42,25 @@ public class User {
 	
 	private String about;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("user")
+	@OneToMany(mappedBy = "username", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("username")
 	private List<Product> product;
 	
-	// Constructor
+	//CONSTRUCTOR
 	
-	public User() {
-		super();
-	}
+		public Username() {
+			super();
+		}
 
-	public User(Long id,String name, String user,String password) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.user = user;
-		this.password = password;
-	}
+		public Username(Long id,String name, String username,String password) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.username = username;
+			this.password = password;
+		}
 	
-	// GET AND SET
+	//GET AND SET
 
 	public Long getId() {
 		return id;
@@ -78,12 +78,12 @@ public class User {
 		this.name = name;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -109,16 +109,9 @@ public class User {
 	public void setAbout(String about) {
 		this.about = about;
 	}
-
-	public List<Product> getProduct() {
-		return product;
-	}
-
-	public void setProduct(List<Product> product) {
-		this.product = product;
-	}
+	
+	
 
 
-
-
+	
 }

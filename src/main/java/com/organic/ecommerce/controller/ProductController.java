@@ -26,15 +26,15 @@ import com.organic.ecommerce.model.Product;
 import com.organic.ecommerce.repository.CategoryRepository;
 import com.organic.ecommerce.repository.ProductRepository;
 
-
-
 @RestController
 @RequestMapping("/product")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductController {
-	
+    
 	private ProductRepository productRepository;
+	
 	private CategoryRepository categoryRepository;
+	
 	
 	@Autowired 
 	public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository){
@@ -121,5 +121,4 @@ public class ProductController {
 		}).orElse(ResponseEntity.notFound().build());
 		
 	}
-
 }

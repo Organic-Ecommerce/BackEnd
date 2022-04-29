@@ -1,10 +1,10 @@
-package com.organic.ecommerce;
+package com.generation.prodigio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OrganicApplicationTests {
+class ProdigioApplicationTests {
 
 	@Test
 	void contextLoads() {
