@@ -12,9 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
 @EnableWebSecurity
-public class BasicSecurityConfig extends WebSecurityConfigurerAdapter{
+public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -47,9 +46,9 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 
 		http.authorizeRequests()
-			.antMatchers("/user/login").permitAll()
-			.antMatchers("/user/register").permitAll()
-			.antMatchers("/products/all").permitAll()
+			.antMatchers("/username/login").permitAll()
+			.antMatchers("/username/register").permitAll()
+			.antMatchers("/username/product").permitAll()
 			.antMatchers(HttpMethod.OPTIONS).permitAll()
 			.anyRequest().authenticated()
 			.and().httpBasic()

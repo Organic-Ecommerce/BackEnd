@@ -1,15 +1,17 @@
 package com.organic.ecommerce.security;
 
+
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.organic.ecommerce.model.User;
+import com.organic.ecommerce.model.Username;
+
+
 
 public class UserDetailsImpl implements UserDetails {
-	
 	private static final long serialVersionUID = 1L;
 
 	private String userName;
@@ -18,8 +20,8 @@ public class UserDetailsImpl implements UserDetails {
 
 	
 
-	public UserDetailsImpl(User user) {
-		this.userName = user.getUser();
+	public UserDetailsImpl(Username user) {
+		this.userName = user.getUsername();
 		this.password = user.getPassword();
 	}
 
@@ -70,5 +72,5 @@ public class UserDetailsImpl implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-
+	
 }

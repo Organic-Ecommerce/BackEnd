@@ -1,28 +1,26 @@
 package com.organic.ecommerce.model;
 
-public class UserLogin {
-	
+public class UsernameLogin {
+
 	private Long id;
-	
+
 	private String name;
-	
+
+	private String username;
+
+	private String password;
+
 	private String photo;
 
 	private String about;
-	
-	private String user;
-	
-	private String password;
-	
-	private String token;
-	
-	// GET AND SET
 
-	public Long getId() {
+	private String token;
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -32,6 +30,22 @@ public class UserLogin {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getPhoto() {
@@ -50,20 +64,8 @@ public class UserLogin {
 		this.about = about;
 	}
 
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getToken() {
@@ -73,8 +75,4 @@ public class UserLogin {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
-	
-
-	
 }

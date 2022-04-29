@@ -8,23 +8,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.organic.ecommerce.model.User;
-import com.organic.ecommerce.repository.UserRepository;
+import com.organic.ecommerce.model.Username;
+import com.organic.ecommerce.repository.UsernameRepository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService {
+
 	@Autowired
-	private UserRepository userRepository;
+	private UsernameRepository usernameRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-		Optional<User> user = userRepository.findByUser(userName);
+		Optional<Username> usuario = usernameRepository.findByUsername(userName);
 
-		user.orElseThrow(() -> new UsernameNotFoundException(userName + " not found."));
+		usuario.orElseThrow(() -> new UsernameNotFoundException(userName + " not found."));
 
-		return user.map(UserDetailsImpl::new).get();
+		return usuario.map(UserDetailsImpl::new).get();
 	}
 	
-
 }
