@@ -1,12 +1,17 @@
 package com.organic.ecommerce.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -14,6 +19,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -34,7 +40,7 @@ public class Product {
 	
 	private String photo;
 	
-	private Integer units;
+	private Integer unitsStock;
 	
 	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -48,6 +54,10 @@ public class Product {
     @ManyToOne
     @JsonIgnoreProperties("product")
     private Username username;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
+    private List<CartItem> cartItem;
     
     // GET AND SET
 	
@@ -83,12 +93,13 @@ public class Product {
 		this.photo = photo;
 	}
 
-	public Integer getUnits() {
-		return units;
+
+	public Integer getUnitsStock() {
+		return unitsStock;
 	}
 
-	public void setUnits(Integer units) {
-		this.units = units;
+	public void setUnitsStock(Integer unitsStock) {
+		this.unitsStock = unitsStock;
 	}
 
 	public BigDecimal getPrice() {
